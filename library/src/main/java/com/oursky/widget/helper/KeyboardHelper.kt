@@ -25,7 +25,9 @@ internal object KeyboardHelper {
         if (activity == null) return
         var view = activity.currentFocus
         //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) view = activity.window.decorView
+        if (view == null) {
+            view = activity.window.decorView
+        }
         val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
