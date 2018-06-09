@@ -1,4 +1,4 @@
-# Oursky Widgets Library
+# Oursky Widgets Library [![Release](https://jitpack.io/v/oursky/android-widgets.svg)](https://jitpack.io/#oursky/android-widgets)
 > Commonly used widgets for Android
 
 ![android](https://img.shields.io/badge/android-kotlin-blue.svg)
@@ -17,13 +17,13 @@ allprojects {
   }
 }
 ```
-Next, edit `build.gradle` under your app, add to dependencies:
+Next, edit `{app}/build.gradle`, add dependencies:
 ```
 dependencies {
   ...
   implementation 'com.github.oursky:android-widgets:0.0.1'
 }
 ```
-Replace `0.0.1` with the latest version. For a list of version, check the [releases](https://github.com/oursky/android-widgets/releases)
+Replace `0.0.1` with the latest version. For a list of version, check the [releases page](https://github.com/oursky/android-widgets/releases).
 
-Now you should be able to use the widgets directly.
+Now you should be able to use the widgets directly. See here for a [list of widgets](widgets/src/main/java/com/oursky/widget).
