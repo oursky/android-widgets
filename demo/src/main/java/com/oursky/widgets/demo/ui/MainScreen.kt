@@ -1,19 +1,28 @@
 package com.oursky.widgets.demo.ui
 
 import android.content.Context
-import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import com.oursky.widgets.demo.R
 
 class MainScreen : BaseController() {
     override fun onCreateView(context: Context): View {
-        val layout = FrameLayout(context)
-        val tv = TextView(context)
-        tv.textSize = 32f
-        tv.setText(R.string.app_name)
-        layout.addView(tv, FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER))
-        return layout
+        val testform = Button(context).apply {
+            setText(R.string.main_form)
+        }
+        val contentView = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+        }
+        contentView.addView(testform, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+        // Event Handlers
+        testform.setOnClickListener {
+            pushController(FormScreen())
+        }
+        return ScrollView(context).apply {
+            addView(contentView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        }
     }
 }
