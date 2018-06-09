@@ -26,4 +26,4 @@ dependencies {
 ```
 Replace `0.0.1` with the latest version. For a list of version, check the [releases page](https://github.com/oursky/android-widgets/releases).
 
-Now you should be able to use the widgets directly. See here for a [list of widgets](widgets/src/main/java/com/oursky/widget).
+Now you should be able to use the widgets directly. See here for a [list of widgets](library/src/main/java/com/oursky/widget).
