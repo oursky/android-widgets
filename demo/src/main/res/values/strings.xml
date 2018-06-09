@@ -5,4 +5,6 @@
     <string name="formedit_title">FormEdit Title</string>
     <string name="formedit_hint">Type something here…</string>
     <string name="formedit_err_toolong">Text too long!</string>
+    <string name="formcombo_title">Select an option</string>
+    <string name="formcombo_datetitle">Select a date</string>
 </resources>

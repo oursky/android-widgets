@@ -20,7 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.oursky.widget.helper.KeyboardHelper
 
-@Suppress("MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER")
 class FormEdit : LinearLayout {
     // delegates
     var onTextChange: ((FormEdit, String) -> Unit)? = null
@@ -133,9 +133,9 @@ class FormEdit : LinearLayout {
         // defaults
         setTitleColor(Color.rgb(96, 96, 96))
         setTitleFont(14, null, Typeface.BOLD)
-        setEditColor(Color.rgb(0, 0, 0))
         setHintColor(Color.rgb(160, 160, 160))
-        setEditFont(16)
+        setTextColor(Color.rgb(0, 0, 0))
+        setTextFont(16)
         setStatusColor(Color.rgb(192, 0, 0))
         setStatusFont(10)
         setInputType(InputType.TYPE_CLASS_TEXT)
@@ -144,32 +144,32 @@ class FormEdit : LinearLayout {
     fun setTitleFont(size: Int) {
         wTitle.textSize = size.toFloat()
     }
-    fun setEditFont(size: Int) {
-        wEdit.textSize = size.toFloat()
-    }
-    fun setStatusFont(size: Int) {
-        wStatus.textSize = size.toFloat()
-    }
     fun setTitleFont(size: Int, typeface: Typeface?, style: Int = Typeface.NORMAL) {
         wTitle.textSize = size.toFloat()
         wTitle.setTypeface(typeface, style)
     }
-    fun setEditFont(size: Int, typeface: Typeface?, style: Int = Typeface.NORMAL) {
+    fun setTitleColor(color: Int) {
+        wTitle.setTextColor(color)
+    }
+    fun setTextFont(size: Int) {
+        wEdit.textSize = size.toFloat()
+    }
+    fun setTextFont(size: Int, typeface: Typeface?, style: Int = Typeface.NORMAL) {
         wEdit.textSize = size.toFloat()
         wEdit.setTypeface(typeface, style)
     }
-    fun setStatusFont(size: Int, typeface: Typeface?, style: Int = Typeface.NORMAL) {
-        wStatus.textSize = size.toFloat()
-        wStatus.setTypeface(typeface, style)
-    }
-    fun setTitleColor(color: Int) {
-        wTitle.setTextColor(color)
+    fun setTextColor(color: Int) {
+        wEdit.setTextColor(color)
     }
     fun setHintColor(color: Int) {
         wEdit.setHintTextColor(color)
     }
-    fun setEditColor(color: Int) {
-        wEdit.setTextColor(color)
+    fun setStatusFont(size: Int) {
+        wStatus.textSize = size.toFloat()
+    }
+    fun setStatusFont(size: Int, typeface: Typeface?, style: Int = Typeface.NORMAL) {
+        wStatus.textSize = size.toFloat()
+        wStatus.setTypeface(typeface, style)
     }
     fun setStatusColor(color: Int) {
         wStatus.setTextColor(color)
@@ -181,9 +181,6 @@ class FormEdit : LinearLayout {
         wTitleIcon.setImageResource(resid)
         wTitleIcon.visibility = View.VISIBLE
     }
-    fun setEyeIcon(resid: Int) {
-        wEye.setImageResource(resid)
-    }
     fun setTitle(resid: Int) {
         wTitle.setText(resid)
     }
@@ -193,11 +190,17 @@ class FormEdit : LinearLayout {
     fun setHint(text: String?) {
         wEdit.hint = text
     }
-    fun setEdit(resid: Int) {
+    fun setText(resid: Int) {
         wEdit.setText(resid)
     }
-    fun setEdit(text: String?) {
+    fun setText(text: String?) {
         wEdit.setText(text, TextView.BufferType.EDITABLE)
+    }
+    fun getText(): String {
+        return wEdit.text.toString()
+    }
+    fun setEyeIcon(resid: Int) {
+        wEye.setImageResource(resid)
     }
     fun setStatus(resid: Int) {
         wStatus.setText(resid)
@@ -206,9 +209,6 @@ class FormEdit : LinearLayout {
     fun setStatus(text: String?) {
         wStatus.text = text
         wStatus.visibility = if (text != null) View.VISIBLE else View.GONE
-    }
-    fun getEdit(): String {
-        return wEdit.text.toString()
     }
     //endregion
 
