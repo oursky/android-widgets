@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.v4.content.res.ResourcesCompat
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -20,7 +21,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.oursky.widget.helper.KeyboardHelper
 
-@Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER")
+@Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "LocalVariableName")
 class FormEdit : LinearLayout {
     // delegates
     var onTextChange: ((FormEdit, String) -> Unit)? = null
@@ -33,7 +34,8 @@ class FormEdit : LinearLayout {
     private val wStatus: TextView
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): this(context, attrs, defStyleAttr, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr) {
         wTitleIcon = ImageView(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
             scaleType = ImageView.ScaleType.FIT_CENTER
@@ -52,7 +54,7 @@ class FormEdit : LinearLayout {
             visibility = View.GONE
         }
         orientation = VERTICAL
-        addView(LinearLayout(context, attrs, defStyleAttr).apply {
+        super.addView(LinearLayout(context, attrs, defStyleAttr).apply {
             orientation = HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             addView(wTitleIcon,
@@ -63,7 +65,7 @@ class FormEdit : LinearLayout {
         }, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
             setMargins(0, 0, 0, dp(4))
         })
-        addView(LinearLayout(context, attrs, defStyleAttr).apply {
+        super.addView(LinearLayout(context, attrs, defStyleAttr).apply {
             orientation = HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             addView(wEdit,
@@ -77,12 +79,12 @@ class FormEdit : LinearLayout {
         }, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
             setMargins(0, 0, 0, dp(2))
         })
-        addView(View(context).apply {
+        super.addView(View(context).apply {
             setBackgroundColor(Color.argb(128, 0, 0, 0))
         }, LayoutParams(LayoutParams.MATCH_PARENT, 1).apply {
             setMargins(0, 0, 0, dp(4))
         })
-        addView(wStatus, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
+        super.addView(wStatus, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
         // Auto re-layout images
         wTitle.addOnLayoutChangeListener { _, left, top, right, bottom, oleft, otop, oright, obottom ->
             val height = bottom - top
@@ -130,15 +132,42 @@ class FormEdit : LinearLayout {
             onAction?.invoke(this@FormEdit, actionId, keyEvent) == true
         }
         wEye.onToggle = { _, _ -> updatePasswordVisibility() }
-        // defaults
-        setTitleColor(Color.rgb(96, 96, 96))
-        setTitleFont(14, null, Typeface.BOLD)
-        setHintColor(Color.rgb(160, 160, 160))
-        setTextColor(Color.rgb(0, 0, 0))
-        setTextFont(16)
-        setStatusColor(Color.rgb(192, 0, 0))
-        setStatusFont(10)
+        //region defaults and styles
         setInputType(InputType.TYPE_CLASS_TEXT)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.FormEdit, defStyleAttr, defStyleRes)
+        // title
+        if (a.hasValue(R.styleable.FormEdit_formedit_title_icon)) {
+            setTitleIcon(a.getResourceId(R.styleable.FormEdit_formedit_title_icon, -1))
+        }
+        setTitleColor(a.getColor(R.styleable.FormEdit_formedit_title_textcolor, Color.rgb(96, 96, 96)))
+        val title_textsize = a.getDimension(R.styleable.FormEdit_formedit_title_textsize, 14f).toInt()
+        val title_font = a.getResourceId(R.styleable.FormEdit_formedit_title_typeface, -1)
+        if (title_font != -1) {
+            setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
+        } else {
+            setTitleFont(title_textsize, null, Typeface.BOLD)
+        }
+        // Content
+        setHintColor(a.getColor(R.styleable.FormEdit_formedit_hint_textcolor, Color.rgb(160, 160, 160)))
+        setTextColor(a.getColor(R.styleable.FormEdit_formedit_content_textcolor, Color.rgb(0, 0, 0)))
+        val content_textsize = a.getDimension(R.styleable.FormEdit_formedit_content_textsize, 16f).toInt()
+        val content_font = a.getResourceId(R.styleable.FormEdit_formedit_content_typeface, -1)
+        if (content_font != -1) {
+            setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
+        } else {
+            setTextFont(content_textsize, null, Typeface.NORMAL)
+        }
+        // Status
+        val status_textsize = a.getDimension(R.styleable.FormEdit_formedit_status_textsize, 10f).toInt()
+        setStatusColor(a.getColor(R.styleable.FormEdit_formedit_status_textcolor, Color.rgb(192, 96, 96)))
+        val status_font = a.getResourceId(R.styleable.FormEdit_formedit_status_typeface, -1)
+        if (status_font != -1) {
+            setStatusFont(status_textsize, ResourcesCompat.getFont(context, status_font), Typeface.NORMAL)
+        } else {
+            setStatusFont(status_textsize, null, Typeface.NORMAL)
+        }
+        a.recycle()
+        //endregion
     }
     //region Font, Color & Appearance
     fun setTitleFont(size: Int) {

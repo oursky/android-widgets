@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FormEdit">
+        <attr name="formedit_title_icon" format="reference" />
+        <attr name="formedit_title_typeface" format="reference" />
+        <attr name="formedit_title_textcolor" format="color" />
+        <attr name="formedit_title_textsize" format="dimension" />
+        <attr name="formedit_title_text" format="string" />
+        <attr name="formedit_content_typeface" format="reference" />
+        <attr name="formedit_content_textcolor" format="color" />
+        <attr name="formedit_content_textsize" format="dimension" />
+        <attr name="formedit_content_text" format="string" />
+        <attr name="formedit_hint_textcolor" format="color" />
+        <attr name="formedit_hint_text" format="string" />
+        <attr name="formedit_status_typeface" format="reference" />
+        <attr name="formedit_status_textcolor" format="color" />
+        <attr name="formedit_status_textsize" format="dimension" />
+        <attr name="formedit_status_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="FormEditTheme">
+        <attr name="FormEditStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="FormCombo">
+        <attr name="formcombo_title_icon" format="reference" />
+        <attr name="formcombo_title_typeface" format="reference" />
+        <attr name="formcombo_title_textcolor" format="color" />
+        <attr name="formcombo_title_textsize" format="dimension" />
+        <attr name="formcombo_title_text" format="string" />
+        <attr name="formcombo_content_typeface" format="reference" />
+        <attr name="formcombo_content_textcolor" format="color" />
+        <attr name="formcombo_content_textsize" format="dimension" />
+        <attr name="formcombo_content_text" format="string" />
+        <attr name="formcombo_status_typeface" format="reference" />
+        <attr name="formcombo_status_textcolor" format="color" />
+        <attr name="formcombo_status_textsize" format="dimension" />
+        <attr name="formcombo_status_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="FormComboTheme">
+        <attr name="FormComboStyle" format="reference"/>
+    </declare-styleable>
+
+</resources>

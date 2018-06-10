@@ -51,6 +51,7 @@ class ToggleImage : ImageView, Checkable {
         imageAlpha = decideAlpha()
         setOnClickListener { _ -> toggle() }
     }
+    //region Checkable
     override fun isChecked(): Boolean = mChecked
     override fun setChecked(checked: Boolean) {
         mChecked = checked
@@ -60,6 +61,9 @@ class ToggleImage : ImageView, Checkable {
     override fun toggle() {
         isChecked = !isChecked
     }
+    //endregion
+
+    //region Animation
     private fun animateAlpha() {
         mAlphaAnimator.cancel()
         mAlphaAnimator.setIntValues(imageAlpha, decideAlpha())
@@ -72,4 +76,5 @@ class ToggleImage : ImageView, Checkable {
             if (mPressed) 32 else 64
         }
     }
+    //endregion
 }

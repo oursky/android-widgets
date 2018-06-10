@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -22,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-@Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "PrivatePropertyName")
+@Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "PrivatePropertyName", "LocalVariableName")
 abstract class FormCombo : LinearLayout {
     private val ANIMATION_DURATION = 150L
     private val wTitleIcon: ImageView
@@ -39,7 +40,8 @@ abstract class FormCombo : LinearLayout {
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): this(context, attrs, defStyleAttr, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr) {
         wTitleIcon = ImageView(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
             scaleType = ImageView.ScaleType.FIT_CENTER
@@ -113,11 +115,31 @@ abstract class FormCombo : LinearLayout {
         setOnClickListener {
             showPicker()
         }
-        // defaults
-        setTitleColor(Color.rgb(96, 96, 96))
-        setTitleFont(14, null, Typeface.BOLD)
-        setTextColor(Color.rgb(0, 0, 0))
-        setTextFont(16)
+        //region defaults and styles
+        val a = context.obtainStyledAttributes(attrs, R.styleable.FormCombo, defStyleAttr, defStyleRes)
+        // title
+        if (a.hasValue(R.styleable.FormCombo_formcombo_title_icon)) {
+            setTitleIcon(a.getResourceId(R.styleable.FormCombo_formcombo_title_icon, -1))
+        }
+        setTitleColor(a.getColor(R.styleable.FormCombo_formcombo_title_textcolor, Color.rgb(96, 96, 96)))
+        val title_textsize = a.getDimension(R.styleable.FormCombo_formcombo_title_textsize, 14f).toInt()
+        val title_font = a.getResourceId(R.styleable.FormCombo_formcombo_title_typeface, -1)
+        if (title_font != -1) {
+            setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
+        } else {
+            setTitleFont(title_textsize, null, Typeface.BOLD)
+        }
+        // Content
+        setTextColor(a.getColor(R.styleable.FormCombo_formcombo_content_textcolor, Color.rgb(0, 0, 0)))
+        val content_textsize = a.getDimension(R.styleable.FormCombo_formcombo_content_textsize, 16f).toInt()
+        val content_font = a.getResourceId(R.styleable.FormCombo_formcombo_content_typeface, -1)
+        if (content_font != -1) {
+            setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
+        } else {
+            setTextFont(content_textsize, null, Typeface.NORMAL)
+        }
+        a.recycle()
+        //endregion
     }
     //region Font, Color & Appearance
     fun setTitleFont(size: Int) {

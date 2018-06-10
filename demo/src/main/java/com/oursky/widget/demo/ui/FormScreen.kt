@@ -1,4 +1,4 @@
-package com.oursky.widgets.demo.ui
+package com.oursky.widget.demo.ui
 
 import android.content.Context
 import android.text.InputType
@@ -14,12 +14,12 @@ import com.oursky.widget.FormComboWithDate
 import com.oursky.widget.FormComboWithList
 import com.oursky.widget.FormComboWithTime
 import com.oursky.widget.FormEdit
-import com.oursky.widgets.demo.R
+import com.oursky.widget.demo.R
 
 class FormScreen : BaseController() {
     override fun onCreateView(context: Context): View {
         val margin = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16.0f, context.resources.displayMetrics))
-        val edit1 = FormEdit(context).apply {
+        val edit1 = FormEdit(context, null, 0, R.style.CustomFormEdit).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formedit_title)
             setHint(R.string.formedit_hint)
