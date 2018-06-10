@@ -43,7 +43,7 @@ dependencies {
     // Our widget library (local development)
     implementation project(':library')
     // Our widget library (released)
-    // implementation 'com.github.oursky:android-widgets:0.0.1'
+    // implementation 'com.github.oursky:android-widgets:master-SNAPSHOT'
 }
 repositories {
     mavenCentral()
