@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import com.oursky.widget.FormComboWithDate
 import com.oursky.widget.FormComboWithList
+import com.oursky.widget.FormComboWithTime
 import com.oursky.widget.FormEdit
 import com.oursky.widgets.demo.R
 
@@ -31,18 +32,24 @@ class FormScreen : BaseController() {
             setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
             setImeOptions(EditorInfo.IME_ACTION_SEND)
         }
-        val picker1 = FormComboWithList(context).apply {
+        val listPicker = FormComboWithList(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
-            setTitle(R.string.formcombo_title)
+            setTitle(R.string.formcombo_listtitle)
             setArrowIcon(R.drawable.ic_combo)
             data = arrayOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
         }
-        val picker2 = FormComboWithDate(context).apply {
+        val datePicker = FormComboWithDate(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formcombo_datetitle)
             setArrowIcon(R.drawable.ic_combo)
             setDateFormat("EEE, MMM d, yyyy")
             setDate(2018, 9, 19)
+        }
+        val timePicker = FormComboWithTime(context).apply {
+            setTitleIcon(R.mipmap.ic_launcher)
+            setTitle(R.string.formcombo_timetitle)
+            setArrowIcon(R.drawable.ic_combo)
+            setTime(13, 20)
         }
         val contentView = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
@@ -53,10 +60,13 @@ class FormScreen : BaseController() {
         contentView.addView(edit2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(margin, margin, margin, 0)
         })
-        contentView.addView(picker1, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+        contentView.addView(listPicker, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(margin, margin, margin, 0)
         })
-        contentView.addView(picker2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+        contentView.addView(datePicker, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(margin, margin, margin, 0)
+        })
+        contentView.addView(timePicker, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(margin, margin, margin, 0)
         })
         // Setup Events
@@ -83,11 +93,17 @@ class FormScreen : BaseController() {
                 false
             }
         }
-        picker1.onSelect = { _, selected ->
-            Log.d("Form", "picker1 selected: $selected")
+        listPicker.onSelect = { _, selected ->
+            Log.d("Form", "listPicker selected: $selected")
         }
-        picker2.onSelect = { _, selected ->
-            Log.d("Form", "picker2 selected: ${picker2.getDateFormat().format(selected.time)}")
+        datePicker.onSelect = { picker, selected ->
+            Log.d("Form", "datePicker selected: ${picker.getDateFormat().format(selected.time)}")
+        }
+        timePicker.onSelect = { picker, hour, minute ->
+            Log.d("Form", "timePicker selected: $hour:$minute")
+            // Truncate to 5-minute interval
+            val truncated = (minute / 5) * 5
+            picker.setTime(hour, truncated)
         }
         return ScrollView(context).apply {
             addView(contentView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))

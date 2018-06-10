@@ -4,10 +4,10 @@ import android.animation.Animator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.MotionEvent
 import android.view.View
 import android.widget.DatePicker
 import android.widget.FrameLayout
@@ -16,6 +16,8 @@ import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.PopupWindow
 import android.widget.TextView
+import android.widget.TimePicker
+import com.oursky.widget.helper.TouchEffect
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -106,35 +108,10 @@ abstract class FormCombo : LinearLayout {
                 }
             }
         }
+        TouchEffect.dimmed(this)
         // Setup Events
         setOnClickListener {
             showPicker()
-        }
-        // Touch Effect
-        setOnTouchListener { v, ev ->
-            when (ev.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    if (v.isEnabled) {
-                        v.animate().cancel()
-                        v.animate().alpha(0.2f).duration = 150
-                        return@setOnTouchListener true
-                    }
-                }
-                MotionEvent.ACTION_CANCEL -> {
-                    if (v.isEnabled) {
-                        v.animate().cancel()
-                        v.animate().alpha(1.0f).duration = 150
-                    }
-                }
-                MotionEvent.ACTION_UP -> {
-                    if (v.isEnabled) {
-                        v.animate().cancel()
-                        v.animate().alpha(1.0f).duration = 150
-                        v.performClick()
-                    }
-                }
-            }
-            false
         }
         // defaults
         setTitleColor(Color.rgb(96, 96, 96))
@@ -305,7 +282,6 @@ class FormComboWithList : FormCombo {
         }
         if (wPicker == null) {
             wPicker = NumberPicker(context).apply {
-                isClickable = true
                 descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
                 wrapSelectorWheel = false
                 setOnValueChangedListener { _, oldValue, newValue ->
@@ -318,6 +294,7 @@ class FormComboWithList : FormCombo {
             wContentView = LinearLayout(context).apply {
                 orientation = VERTICAL
                 gravity = Gravity.CENTER_HORIZONTAL
+                isClickable = true
                 setBackgroundColor(Color.WHITE)
                 addView(wPickerTitle, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                     setMargins(0, dp(8), 0, dp(8))
@@ -368,7 +345,7 @@ class FormComboWithDate : FormCombo {
         mMaxDate = 0
         setMinDate(null)
         setMaxDate(null)
-        setText(mDateFormatter.format(getDate().time))
+        updateLabel()
     }
     override fun createPicker(): View {
         if (wPicker == null) {
@@ -382,7 +359,7 @@ class FormComboWithDate : FormCombo {
                     mYear = year
                     mMonth = month
                     mDay = day
-                    setText(mDateFormatter.format(getDate().time))
+                    updateLabel()
                     onSelect?.invoke(this@FormComboWithDate, getDate())
                 }
             }
@@ -402,12 +379,12 @@ class FormComboWithDate : FormCombo {
         wPicker?.minDate = mMinDate
     }
     fun setMaxDate(date: Calendar?) {
-        if (date != null) {
-            mMaxDate = date.timeInMillis
+        mMaxDate = if (date != null) {
+            date.timeInMillis
         } else {
             val d = Calendar.getInstance()
             d.add(Calendar.YEAR, 10)
-            mMaxDate = d.timeInMillis
+            d.timeInMillis
         }
         wPicker?.maxDate = mMaxDate
     }
@@ -415,16 +392,22 @@ class FormComboWithDate : FormCombo {
         mYear = date.get(Calendar.YEAR)
         mMonth = date.get(Calendar.MONTH)
         mDay = date.get(Calendar.DAY_OF_MONTH)
-        wPicker?.updateDate(mYear, mMonth, mDay)
+        updateLabel()
+        if (wPicker != null) {
+            wPicker?.updateDate(mYear, mMonth, mDay)
+        } else {
+            onSelect?.invoke(this@FormComboWithDate, getDate())
+        }
     }
     fun setDate(year: Int, month: Int, day: Int) {
         mYear = year
         mMonth = month - 1
         mDay = day
+        updateLabel()
         if (wPicker != null) {
             wPicker?.updateDate(mYear, mMonth, mDay)
         } else {
-            setText(mDateFormatter.format(getDate().time))
+            onSelect?.invoke(this@FormComboWithDate, getDate())
         }
     }
     fun getDate(): Calendar {
@@ -434,7 +417,84 @@ class FormComboWithDate : FormCombo {
     }
     fun setDateFormat(pattern: String) {
         mDateFormatter.applyPattern(pattern)
-        setText(mDateFormatter.format(getDate().time))
+        updateLabel()
     }
     fun getDateFormat(): SimpleDateFormat = mDateFormatter
+    private fun updateLabel() {
+        setText(mDateFormatter.format(getDate().time))
+    }
+}
+@Suppress("MemberVisibilityCanBePrivate")
+class FormComboWithTime : FormCombo {
+    // delegates
+    var onSelect: ((FormComboWithTime, hour: Int, minute: Int) -> Unit)? = null
+    private var wContentView: FrameLayout? = null
+    private var wPicker: TimePicker? = null
+    private var mHour: Int
+    private var mMinute: Int
+    constructor(context: Context) : this(context, null, 0)
+    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+        val now = Calendar.getInstance()
+        mHour = now.get(Calendar.HOUR)
+        mMinute = now.get(Calendar.MINUTE)
+        updateLabel()
+    }
+    override fun createPicker(): View {
+        if (wPicker == null) {
+            wPicker = TimePicker(context).apply {
+                isClickable = true
+                setBackgroundColor(Color.WHITE)
+                descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+                setIs24HourView(true)
+                @Suppress("DEPRECATION")
+                if (Build.VERSION.SDK_INT < 23) {
+                    currentHour = mHour
+                    currentMinute = mMinute
+                } else {
+                    hour = mHour
+                    minute = mMinute
+                }
+                setOnTimeChangedListener { _, hour, minute ->
+                    mHour = hour
+                    mMinute = minute
+                    updateLabel()
+                    onSelect?.invoke(this@FormComboWithTime, mHour, mMinute)
+                }
+            }
+        }
+        if (wContentView == null) {
+            wContentView = FrameLayout(context).apply {
+                addView(wPicker, FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL))
+            }
+        }
+        return wContentView as View
+    }
+    override fun setupPicker() {
+        wPicker?.let {
+            @Suppress("DEPRECATION")
+            if (Build.VERSION.SDK_INT < 23) {
+                it.currentHour = mHour
+                it.currentMinute = mMinute
+            } else {
+                it.hour = mHour
+                it.minute = mMinute
+            }
+        }
+    }
+    fun setTime(hour: Int, minute: Int) {
+        mHour = hour
+        mMinute = minute
+        updateLabel()
+        if (wPicker != null ) {
+            setupPicker()
+        } else {
+            onSelect?.invoke(this@FormComboWithTime, mHour, mMinute)
+        }
+    }
+    fun getHour(): Int = mHour
+    fun getMinute(): Int = mMinute
+    private fun updateLabel() {
+        setText(String.format(Locale.US, "%02d:%02d", mHour, mMinute))
+    }
 }
