@@ -1,4 +1,4 @@
-package com.oursky.widgets.demo
+package com.oursky.widget.demo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.oursky.widgets.demo.ui.MainScreen
+import com.oursky.widget.demo.ui.MainScreen
 
 class MainActivity : AppCompatActivity() {
     private var mRouter: Router? = null

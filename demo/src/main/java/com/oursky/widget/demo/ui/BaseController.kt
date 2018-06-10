@@ -1,4 +1,4 @@
-package com.oursky.widgets.demo.ui
+package com.oursky.widget.demo.ui
 
 import android.content.Context
 import android.os.Bundle

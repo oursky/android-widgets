@@ -1,4 +1,4 @@
-package com.oursky.widgets.demo.ui
+package com.oursky.widget.demo.ui
 
 import android.content.Context
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import com.oursky.widgets.demo.R
+import com.oursky.widget.demo.R
 
 class MainScreen : BaseController() {
     override fun onCreateView(context: Context): View {
