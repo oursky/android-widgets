@@ -10,21 +10,21 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import com.oursky.widget.FormComboWithDate
-import com.oursky.widget.FormComboWithList
-import com.oursky.widget.FormComboWithTime
-import com.oursky.widget.FormEdit
+import com.oursky.widget.SFormComboWithDate
+import com.oursky.widget.SFormComboWithList
+import com.oursky.widget.SFormComboWithTime
+import com.oursky.widget.SFormEdit
 import com.oursky.widget.demo.R
 
 class FormScreen : BaseController() {
     override fun onCreateView(context: Context): View {
         val margin = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16.0f, context.resources.displayMetrics))
-        val edit1 = FormEdit(context, null, 0, R.style.CustomFormEdit).apply {
+        val edit1 = SFormEdit(context, null, 0, R.style.CustomFormEdit).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formedit_title)
             setHint(R.string.formedit_hint)
         }
-        val edit2 = FormEdit(context).apply {
+        val edit2 = SFormEdit(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formedit_title)
             setHint(R.string.formedit_hint)
@@ -32,20 +32,20 @@ class FormScreen : BaseController() {
             setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
             setImeOptions(EditorInfo.IME_ACTION_SEND)
         }
-        val listPicker = FormComboWithList(context).apply {
+        val listPicker = SFormComboWithList(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formcombo_listtitle)
             setArrowIcon(R.drawable.ic_combo)
             data = arrayOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
         }
-        val datePicker = FormComboWithDate(context).apply {
+        val datePicker = SFormComboWithDate(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formcombo_datetitle)
             setArrowIcon(R.drawable.ic_combo)
             setDateFormat("EEE, MMM d, yyyy")
             setDate(2018, 9, 19)
         }
-        val timePicker = FormComboWithTime(context).apply {
+        val timePicker = SFormComboWithTime(context).apply {
             setTitleIcon(R.mipmap.ic_launcher)
             setTitle(R.string.formcombo_timetitle)
             setArrowIcon(R.drawable.ic_combo)

@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.annotation.ColorInt
+import android.support.annotation.DrawableRes
+import android.support.annotation.StringRes
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Editable
 import android.text.InputType
@@ -22,15 +25,15 @@ import android.widget.TextView
 import com.oursky.widget.helper.KeyboardHelper
 
 @Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "LocalVariableName")
-class FormEdit : LinearLayout {
+class SFormEdit : LinearLayout {
     // delegates
-    var onTextChange: ((FormEdit, String) -> Unit)? = null
-    var onAction: ((FormEdit, actionId: Int, ev: KeyEvent?) -> Boolean)? = null
+    var onTextChange: ((SFormEdit, String) -> Unit)? = null
+    var onAction: ((SFormEdit, actionId: Int, ev: KeyEvent?) -> Boolean)? = null
 
     private val wTitleIcon: ImageView
     private val wTitle: TextView
     private val wEdit: EditText
-    private val wEye: ToggleImage
+    private val wEye: SToggle
     private val wStatus: TextView
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
@@ -46,7 +49,7 @@ class FormEdit : LinearLayout {
             setTextIsSelectable(true)
             setSingleLine(true)
         }
-        wEye = ToggleImage(context, attrs, defStyleAttr).apply {
+        wEye = SToggle(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
             scaleType = ImageView.ScaleType.FIT_CENTER
         }
@@ -125,43 +128,43 @@ class FormEdit : LinearLayout {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                this@FormEdit.onTextChange?.invoke(this@FormEdit, s.toString())
+                this@SFormEdit.onTextChange?.invoke(this@SFormEdit, s.toString())
             }
         })
         wEdit.setOnEditorActionListener { _, actionId, keyEvent ->
-            onAction?.invoke(this@FormEdit, actionId, keyEvent) == true
+            onAction?.invoke(this@SFormEdit, actionId, keyEvent) == true
         }
         wEye.onToggle = { _, _ -> updatePasswordVisibility() }
         //region defaults and styles
         setInputType(InputType.TYPE_CLASS_TEXT)
-        val a = context.obtainStyledAttributes(attrs, R.styleable.FormEdit, defStyleAttr, defStyleRes)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.SFormEdit, defStyleAttr, defStyleRes)
         // title
-        if (a.hasValue(R.styleable.FormEdit_formedit_title_icon)) {
-            setTitleIcon(a.getResourceId(R.styleable.FormEdit_formedit_title_icon, -1))
+        if (a.hasValue(R.styleable.SFormEdit_x_title_icon)) {
+            setTitleIcon(a.getResourceId(R.styleable.SFormEdit_x_title_icon, -1))
         }
-        setTitleColor(a.getColor(R.styleable.FormEdit_formedit_title_textcolor, Color.rgb(96, 96, 96)))
-        val title_textsize = a.getDimension(R.styleable.FormEdit_formedit_title_textsize, 14f).toInt()
-        val title_font = a.getResourceId(R.styleable.FormEdit_formedit_title_typeface, -1)
-        if (title_font != -1) {
+        setTitleColor(a.getColor(R.styleable.SFormEdit_x_title_textcolor, Color.rgb(96, 96, 96)))
+        val title_textsize = a.getDimension(R.styleable.SFormEdit_x_title_textsize, 14f).toInt()
+        if (a.hasValue(R.styleable.SFormEdit_x_title_typeface)) {
+            val title_font = a.getResourceId(R.styleable.SFormEdit_x_title_typeface, -1)
             setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
         } else {
             setTitleFont(title_textsize, null, Typeface.BOLD)
         }
         // Content
-        setHintColor(a.getColor(R.styleable.FormEdit_formedit_hint_textcolor, Color.rgb(160, 160, 160)))
-        setTextColor(a.getColor(R.styleable.FormEdit_formedit_content_textcolor, Color.rgb(0, 0, 0)))
-        val content_textsize = a.getDimension(R.styleable.FormEdit_formedit_content_textsize, 16f).toInt()
-        val content_font = a.getResourceId(R.styleable.FormEdit_formedit_content_typeface, -1)
-        if (content_font != -1) {
+        setHintColor(a.getColor(R.styleable.SFormEdit_x_hint_textcolor, Color.rgb(160, 160, 160)))
+        setTextColor(a.getColor(R.styleable.SFormEdit_x_content_textcolor, Color.rgb(0, 0, 0)))
+        val content_textsize = a.getDimension(R.styleable.SFormEdit_x_content_textsize, 16f).toInt()
+        if (a.hasValue(R.styleable.SFormEdit_x_content_typeface)) {
+            val content_font = a.getResourceId(R.styleable.SFormEdit_x_content_typeface, -1)
             setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
         } else {
             setTextFont(content_textsize, null, Typeface.NORMAL)
         }
         // Status
-        val status_textsize = a.getDimension(R.styleable.FormEdit_formedit_status_textsize, 10f).toInt()
-        setStatusColor(a.getColor(R.styleable.FormEdit_formedit_status_textcolor, Color.rgb(192, 96, 96)))
-        val status_font = a.getResourceId(R.styleable.FormEdit_formedit_status_typeface, -1)
-        if (status_font != -1) {
+        val status_textsize = a.getDimension(R.styleable.SFormEdit_x_status_textsize, 10f).toInt()
+        setStatusColor(a.getColor(R.styleable.SFormEdit_x_status_textcolor, Color.rgb(192, 96, 96)))
+        if (a.hasValue(R.styleable.SFormEdit_x_status_typeface)) {
+            val status_font = a.getResourceId(R.styleable.SFormEdit_x_status_typeface, -1)
             setStatusFont(status_textsize, ResourcesCompat.getFont(context, status_font), Typeface.NORMAL)
         } else {
             setStatusFont(status_textsize, null, Typeface.NORMAL)
@@ -177,7 +180,7 @@ class FormEdit : LinearLayout {
         wTitle.textSize = size.toFloat()
         wTitle.setTypeface(typeface, style)
     }
-    fun setTitleColor(color: Int) {
+    fun setTitleColor(@ColorInt color: Int) {
         wTitle.setTextColor(color)
     }
     fun setTextFont(size: Int) {
@@ -187,10 +190,10 @@ class FormEdit : LinearLayout {
         wEdit.textSize = size.toFloat()
         wEdit.setTypeface(typeface, style)
     }
-    fun setTextColor(color: Int) {
+    fun setTextColor(@ColorInt color: Int) {
         wEdit.setTextColor(color)
     }
-    fun setHintColor(color: Int) {
+    fun setHintColor(@ColorInt color: Int) {
         wEdit.setHintTextColor(color)
     }
     fun setStatusFont(size: Int) {
@@ -200,26 +203,26 @@ class FormEdit : LinearLayout {
         wStatus.textSize = size.toFloat()
         wStatus.setTypeface(typeface, style)
     }
-    fun setStatusColor(color: Int) {
+    fun setStatusColor(@ColorInt color: Int) {
         wStatus.setTextColor(color)
     }
     //endregion
 
     //region Text Value
-    fun setTitleIcon(resid: Int) {
+    fun setTitleIcon(@DrawableRes resid: Int) {
         wTitleIcon.setImageResource(resid)
         wTitleIcon.visibility = View.VISIBLE
     }
-    fun setTitle(resid: Int) {
+    fun setTitle(@StringRes resid: Int) {
         wTitle.setText(resid)
     }
-    fun setHint(resid: Int) {
+    fun setHint(@StringRes resid: Int) {
         wEdit.setHint(resid)
     }
     fun setHint(text: String?) {
         wEdit.hint = text
     }
-    fun setText(resid: Int) {
+    fun setText(@StringRes resid: Int) {
         wEdit.setText(resid)
     }
     fun setText(text: String?) {
@@ -228,10 +231,10 @@ class FormEdit : LinearLayout {
     fun getText(): String {
         return wEdit.text.toString()
     }
-    fun setEyeIcon(resid: Int) {
+    fun setEyeIcon(@DrawableRes resid: Int) {
         wEye.setImageResource(resid)
     }
-    fun setStatus(resid: Int) {
+    fun setStatus(@StringRes resid: Int) {
         wStatus.setText(resid)
         wStatus.visibility = View.VISIBLE
     }
