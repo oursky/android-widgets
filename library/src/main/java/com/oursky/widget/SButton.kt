@@ -48,7 +48,6 @@ class SButton : LinearLayout {
             setAllCaps(true)
         }
 
-        setBackgroundColor(0x7fff00ff)
         orientation = LinearLayout.VERTICAL
         gravity = Gravity.CENTER_HORIZONTAL
         addView(wIconTop, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
@@ -60,56 +59,45 @@ class SButton : LinearLayout {
             addView(wIconRight, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
         }, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
         addView(wIconBottom, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
-
-        // Auto re-layout images
-        wText.addOnLayoutChangeListener { _, left, top, right, bottom, oleft, otop, oright, obottom ->
-            val height = bottom - top
-            val oheight = obottom - otop
-            if (height != oheight) {
-                val width = right - left
-                wText.post {
-                    val lpLeft = wIconLeft.layoutParams as LinearLayout.LayoutParams
-                    lpLeft.width = height
-                    lpLeft.height = height
-                    lpLeft.rightMargin = height / 2
-                    wIconLeft.layoutParams = lpLeft
-                    val lpRight = wIconRight.layoutParams as LinearLayout.LayoutParams
-                    lpRight.width = height
-                    lpRight.height = height
-                    lpRight.leftMargin = height / 2
-                    wIconRight.layoutParams = lpRight
-                    val lpTop = wIconTop.layoutParams as LinearLayout.LayoutParams
-                    lpTop.width = width / 2
-                    lpTop.height = width / 2
-                    lpTop.bottomMargin = height / 2
-                    wIconTop.layoutParams = lpTop
-                    val lpBottom = wIconBottom.layoutParams as LinearLayout.LayoutParams
-                    lpBottom.width = width / 2
-                    lpBottom.height = width / 2
-                    lpBottom.topMargin = height / 2
-                    wIconBottom.layoutParams = lpBottom
-                }
-            }
-        }
         TouchEffect.dimmed(this)
         setOnClickListener { _ -> onClick?.invoke(this@SButton) }
     }
-    fun setIcon(index: IconIndex, @DrawableRes resid: Int) {
+    fun setIcon(index: IconIndex, @DrawableRes resid: Int, size: Int) {
         when (index) {
             IconIndex.LEFT -> {
                 wIconLeft.setImageResource(resid)
+                val lpLeft = wIconLeft.layoutParams as LinearLayout.LayoutParams
+                lpLeft.width = size
+                lpLeft.height = size
+                lpLeft.rightMargin = size / 2
+                wIconLeft.layoutParams = lpLeft
                 wIconLeft.visibility = View.VISIBLE
             }
             IconIndex.TOP -> {
                 wIconTop.setImageResource(resid)
+                val lpTop = wIconTop.layoutParams as LinearLayout.LayoutParams
+                lpTop.width = size
+                lpTop.height = size
+                lpTop.bottomMargin = size / 4
+                wIconTop.layoutParams = lpTop
                 wIconTop.visibility = View.VISIBLE
             }
             IconIndex.RIGHT -> {
                 wIconRight.setImageResource(resid)
+                val lpRight = wIconRight.layoutParams as LinearLayout.LayoutParams
+                lpRight.width = size
+                lpRight.height = size
+                lpRight.leftMargin = size / 2
+                wIconRight.layoutParams = lpRight
                 wIconRight.visibility = View.VISIBLE
             }
             IconIndex.BOTTOM -> {
                 wIconBottom.setImageResource(resid)
+                val lpBottom = wIconBottom.layoutParams as LinearLayout.LayoutParams
+                lpBottom.width = size
+                lpBottom.height = size
+                lpBottom.topMargin = size / 4
+                wIconBottom.layoutParams = lpBottom
                 wIconBottom.visibility = View.VISIBLE
             }
         }
