@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Widgets Demo</string>
+    <string name="main_button">Buttons</string>
     <string name="main_form">Form UI</string>
-
     <string name="formedit_title">FormEdit Title</string>
     <string name="formedit_hint">Type something here…</string>
     <string name="formedit_err_toolong">Text too long!</string>

@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.annotation.ColorInt
+import android.support.annotation.DrawableRes
+import android.support.annotation.StringRes
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Editable
 import android.text.InputType
@@ -177,7 +180,7 @@ class SFormEdit : LinearLayout {
         wTitle.textSize = size.toFloat()
         wTitle.setTypeface(typeface, style)
     }
-    fun setTitleColor(color: Int) {
+    fun setTitleColor(@ColorInt color: Int) {
         wTitle.setTextColor(color)
     }
     fun setTextFont(size: Int) {
@@ -187,10 +190,10 @@ class SFormEdit : LinearLayout {
         wEdit.textSize = size.toFloat()
         wEdit.setTypeface(typeface, style)
     }
-    fun setTextColor(color: Int) {
+    fun setTextColor(@ColorInt color: Int) {
         wEdit.setTextColor(color)
     }
-    fun setHintColor(color: Int) {
+    fun setHintColor(@ColorInt color: Int) {
         wEdit.setHintTextColor(color)
     }
     fun setStatusFont(size: Int) {
@@ -200,26 +203,26 @@ class SFormEdit : LinearLayout {
         wStatus.textSize = size.toFloat()
         wStatus.setTypeface(typeface, style)
     }
-    fun setStatusColor(color: Int) {
+    fun setStatusColor(@ColorInt color: Int) {
         wStatus.setTextColor(color)
     }
     //endregion
 
     //region Text Value
-    fun setTitleIcon(resid: Int) {
+    fun setTitleIcon(@DrawableRes resid: Int) {
         wTitleIcon.setImageResource(resid)
         wTitleIcon.visibility = View.VISIBLE
     }
-    fun setTitle(resid: Int) {
+    fun setTitle(@StringRes resid: Int) {
         wTitle.setText(resid)
     }
-    fun setHint(resid: Int) {
+    fun setHint(@StringRes resid: Int) {
         wEdit.setHint(resid)
     }
     fun setHint(text: String?) {
         wEdit.hint = text
     }
-    fun setText(resid: Int) {
+    fun setText(@StringRes resid: Int) {
         wEdit.setText(resid)
     }
     fun setText(text: String?) {
@@ -228,10 +231,10 @@ class SFormEdit : LinearLayout {
     fun getText(): String {
         return wEdit.text.toString()
     }
-    fun setEyeIcon(resid: Int) {
+    fun setEyeIcon(@DrawableRes resid: Int) {
         wEye.setImageResource(resid)
     }
-    fun setStatus(resid: Int) {
+    fun setStatus(@StringRes resid: Int) {
         wStatus.setText(resid)
         wStatus.visibility = View.VISIBLE
     }

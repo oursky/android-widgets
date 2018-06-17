@@ -5,6 +5,9 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
+import android.support.annotation.ColorInt
+import android.support.annotation.DrawableRes
+import android.support.annotation.StringRes
 import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -149,7 +152,7 @@ abstract class SFormCombo : LinearLayout {
         wTitle.textSize = size.toFloat()
         wTitle.setTypeface(typeface, style)
     }
-    fun setTitleColor(color: Int) {
+    fun setTitleColor(@ColorInt color: Int) {
         wTitle.setTextColor(color)
     }
     fun setTextFont(size: Int) {
@@ -159,23 +162,23 @@ abstract class SFormCombo : LinearLayout {
         wText.textSize = size.toFloat()
         wText.setTypeface(typeface, style)
     }
-    fun setTextColor(color: Int) {
+    fun setTextColor(@ColorInt color: Int) {
         wText.setTextColor(color)
     }
     //endregion
 
     //region Text Value
-    fun setTitleIcon(resid: Int) {
+    fun setTitleIcon(@DrawableRes resid: Int) {
         wTitleIcon.setImageResource(resid)
         wTitleIcon.visibility = View.VISIBLE
     }
-    fun setTitle(resid: Int) {
+    fun setTitle(@StringRes resid: Int) {
         wTitle.setText(resid)
     }
     fun getTitle(): String {
         return wTitle.text.toString()
     }
-    fun setArrowIcon(resid: Int) {
+    fun setArrowIcon(@DrawableRes resid: Int) {
         wArrow.setImageResource(resid)
     }
     fun setText(text: String?) {
