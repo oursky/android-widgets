@@ -24,7 +24,7 @@ import java.util.Calendar
 import java.util.Locale
 
 @Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "PrivatePropertyName", "LocalVariableName")
-abstract class FormCombo : LinearLayout {
+abstract class SFormCombo : LinearLayout {
     private val ANIMATION_DURATION = 150L
     private val wTitleIcon: ImageView
     private val wTitle: TextView
@@ -116,24 +116,24 @@ abstract class FormCombo : LinearLayout {
             showPicker()
         }
         //region defaults and styles
-        val a = context.obtainStyledAttributes(attrs, R.styleable.FormCombo, defStyleAttr, defStyleRes)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.SFormCombo, defStyleAttr, defStyleRes)
         // title
-        if (a.hasValue(R.styleable.FormCombo_formcombo_title_icon)) {
-            setTitleIcon(a.getResourceId(R.styleable.FormCombo_formcombo_title_icon, -1))
+        if (a.hasValue(R.styleable.SFormCombo_x_title_icon)) {
+            setTitleIcon(a.getResourceId(R.styleable.SFormCombo_x_title_icon, -1))
         }
-        setTitleColor(a.getColor(R.styleable.FormCombo_formcombo_title_textcolor, Color.rgb(96, 96, 96)))
-        val title_textsize = a.getDimension(R.styleable.FormCombo_formcombo_title_textsize, 14f).toInt()
-        val title_font = a.getResourceId(R.styleable.FormCombo_formcombo_title_typeface, -1)
-        if (title_font != -1) {
+        setTitleColor(a.getColor(R.styleable.SFormCombo_x_title_textcolor, Color.rgb(96, 96, 96)))
+        val title_textsize = a.getDimension(R.styleable.SFormCombo_x_title_textsize, 14f).toInt()
+        if (a.hasValue(R.styleable.SFormCombo_x_title_typeface)) {
+            val title_font = a.getResourceId(R.styleable.SFormCombo_x_title_typeface, -1)
             setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
         } else {
             setTitleFont(title_textsize, null, Typeface.BOLD)
         }
         // Content
-        setTextColor(a.getColor(R.styleable.FormCombo_formcombo_content_textcolor, Color.rgb(0, 0, 0)))
-        val content_textsize = a.getDimension(R.styleable.FormCombo_formcombo_content_textsize, 16f).toInt()
-        val content_font = a.getResourceId(R.styleable.FormCombo_formcombo_content_typeface, -1)
-        if (content_font != -1) {
+        setTextColor(a.getColor(R.styleable.SFormCombo_x_content_textcolor, Color.rgb(0, 0, 0)))
+        val content_textsize = a.getDimension(R.styleable.SFormCombo_x_content_textsize, 16f).toInt()
+        if (a.hasValue(R.styleable.SFormCombo_x_content_typeface)) {
+            val content_font = a.getResourceId(R.styleable.SFormCombo_x_content_typeface, -1)
             setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
         } else {
             setTextFont(content_textsize, null, Typeface.NORMAL)
@@ -275,9 +275,9 @@ abstract class FormCombo : LinearLayout {
 }
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER", "PrivatePropertyName", "MemberVisibilityCanBePrivate")
-class FormComboWithList : FormCombo {
+class SFormComboWithList : SFormCombo {
     // delegates
-    var onSelect: ((FormComboWithList, index: Int) -> Unit)? = null
+    var onSelect: ((SFormComboWithList, index: Int) -> Unit)? = null
     var selected: Int = 0
         set(value) {
             field = value
@@ -308,7 +308,7 @@ class FormComboWithList : FormCombo {
                 wrapSelectorWheel = false
                 setOnValueChangedListener { _, oldValue, newValue ->
                     selected = newValue
-                    onSelect?.invoke(this@FormComboWithList, selected)
+                    onSelect?.invoke(this@SFormComboWithList, selected)
                 }
             }
         }
@@ -344,9 +344,9 @@ class FormComboWithList : FormCombo {
     }
 }
 @Suppress("MemberVisibilityCanBePrivate")
-class FormComboWithDate : FormCombo {
+class SFormComboWithDate : SFormCombo {
     // delegates
-    var onSelect: ((FormComboWithDate, date: Calendar) -> Unit)? = null
+    var onSelect: ((SFormComboWithDate, date: Calendar) -> Unit)? = null
     private var wContentView: FrameLayout? = null
     private var wPicker: DatePicker? = null
     private var mYear: Int
@@ -382,7 +382,7 @@ class FormComboWithDate : FormCombo {
                     mMonth = month
                     mDay = day
                     updateLabel()
-                    onSelect?.invoke(this@FormComboWithDate, getDate())
+                    onSelect?.invoke(this@SFormComboWithDate, getDate())
                 }
             }
         }
@@ -418,7 +418,7 @@ class FormComboWithDate : FormCombo {
         if (wPicker != null) {
             wPicker?.updateDate(mYear, mMonth, mDay)
         } else {
-            onSelect?.invoke(this@FormComboWithDate, getDate())
+            onSelect?.invoke(this@SFormComboWithDate, getDate())
         }
     }
     fun setDate(year: Int, month: Int, day: Int) {
@@ -429,7 +429,7 @@ class FormComboWithDate : FormCombo {
         if (wPicker != null) {
             wPicker?.updateDate(mYear, mMonth, mDay)
         } else {
-            onSelect?.invoke(this@FormComboWithDate, getDate())
+            onSelect?.invoke(this@SFormComboWithDate, getDate())
         }
     }
     fun getDate(): Calendar {
@@ -447,9 +447,9 @@ class FormComboWithDate : FormCombo {
     }
 }
 @Suppress("MemberVisibilityCanBePrivate")
-class FormComboWithTime : FormCombo {
+class SFormComboWithTime : SFormCombo {
     // delegates
-    var onSelect: ((FormComboWithTime, hour: Int, minute: Int) -> Unit)? = null
+    var onSelect: ((SFormComboWithTime, hour: Int, minute: Int) -> Unit)? = null
     private var wContentView: FrameLayout? = null
     private var wPicker: TimePicker? = null
     private var mHour: Int
@@ -481,7 +481,7 @@ class FormComboWithTime : FormCombo {
                     mHour = hour
                     mMinute = minute
                     updateLabel()
-                    onSelect?.invoke(this@FormComboWithTime, mHour, mMinute)
+                    onSelect?.invoke(this@SFormComboWithTime, mHour, mMinute)
                 }
             }
         }
@@ -511,7 +511,7 @@ class FormComboWithTime : FormCombo {
         if (wPicker != null ) {
             setupPicker()
         } else {
-            onSelect?.invoke(this@FormComboWithTime, mHour, mMinute)
+            onSelect?.invoke(this@SFormComboWithTime, mHour, mMinute)
         }
     }
     fun getHour(): Int = mHour

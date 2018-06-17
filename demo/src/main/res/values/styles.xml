@@ -6,12 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="FormEditStyle">@style/CustomFormEdit</item>
     </style>
 
     <style name="CustomFormEdit">
-        <item name="formedit_title_textcolor">#ff00ff</item>
-        <item name="formedit_title_textsize">14sp</item>
+        <item name="x_title_textcolor">#ff00ff</item>
+        <item name="x_title_textsize">14sp</item>
     </style>
 
 </resources>
