@@ -12,4 +12,9 @@
     <string name="formcombo_listtitle">Select an option</string>
     <string name="formcombo_datetitle">Select date</string>
     <string name="formcombo_timetitle">Select time</string>
+    <string name="formlabel_title">Form Label Title</string>
+    <string name="formlabel_content_no_icon">Text without icon</string>
+    <string name="formlabel_content_left_icon">Text with left icon only</string>
+    <string name="formlabel_content_right_icon">Text with right icon only</string>
+    <string name="formlabel_content_both_icon">Text with both left and right icon</string>
 </resources>
