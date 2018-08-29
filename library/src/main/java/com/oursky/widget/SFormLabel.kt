@@ -1,8 +1,10 @@
 package com.oursky.widget
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.annotation.StyleableRes
 import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -113,7 +115,7 @@ open class SFormLabel : LinearLayout {
             setTitleIcon(a.getResourceId(R.styleable.SFormLabel_x_title_icon, -1))
         }
         setTitleColor(a.getColor(R.styleable.SFormLabel_x_title_textcolor, Color.rgb(96, 96, 96)))
-        val title_textsize = a.getDimension(R.styleable.SFormLabel_x_title_textsize, 14f).toInt()
+        val title_textsize = getTextSizeInSp(a, R.styleable.SFormLabel_x_title_textsize, 14)
         val title_font = a.getResourceId(R.styleable.SFormLabel_x_title_typeface, -1)
         if (title_font != -1) {
             setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
@@ -123,7 +125,7 @@ open class SFormLabel : LinearLayout {
         // Content
         setHintColor(a.getColor(R.styleable.SFormLabel_x_hint_textcolor, Color.rgb(160, 160, 160)))
         setTextColor(a.getColor(R.styleable.SFormLabel_x_content_textcolor, Color.rgb(0, 0, 0)))
-        val content_textsize = a.getDimension(R.styleable.SFormLabel_x_content_textsize, 16f).toInt()
+        val content_textsize = getTextSizeInSp(a, R.styleable.SFormLabel_x_content_textsize, 16)
         val content_font = a.getResourceId(R.styleable.SFormLabel_x_content_typeface, -1)
         if (content_font != -1) {
             setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
@@ -156,7 +158,7 @@ open class SFormLabel : LinearLayout {
             setBorderColor(a.getColor(R.styleable.SFormLabel_x_border_color, Color.argb(128, 0, 0, 0)))
         }
         // Status
-        val status_textsize = a.getDimension(R.styleable.SFormLabel_x_status_textsize, 10f).toInt()
+        val status_textsize = a.getDimensionPixelSize(R.styleable.SFormLabel_x_status_textsize, 10)
         setStatusColor(a.getColor(R.styleable.SFormLabel_x_status_textcolor, Color.rgb(192, 96, 96)))
         val status_font = a.getResourceId(R.styleable.SFormLabel_x_status_typeface, -1)
         if (status_font != -1) {
@@ -274,6 +276,10 @@ open class SFormLabel : LinearLayout {
     //region Helper functions
     private fun dp(v: Int): Int {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), context.resources.displayMetrics))
+    }
+    private fun getTextSizeInSp(a: TypedArray, @StyleableRes attr: Int, defValue: Int): Int {
+        val density = resources.displayMetrics.scaledDensity
+        return (a.getDimensionPixelSize(attr, (defValue * density).toInt()) / density).toInt()
     }
     private fun setIconToSquare(view: View, size: Int) {
         val lp = view.layoutParams

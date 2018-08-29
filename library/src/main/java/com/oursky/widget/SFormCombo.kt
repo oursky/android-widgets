@@ -2,12 +2,14 @@ package com.oursky.widget
 
 import android.animation.Animator
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
+import android.support.annotation.StyleableRes
 import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -125,7 +127,7 @@ abstract class SFormCombo : LinearLayout {
             setTitleIcon(a.getResourceId(R.styleable.SFormCombo_x_title_icon, -1))
         }
         setTitleColor(a.getColor(R.styleable.SFormCombo_x_title_textcolor, Color.rgb(96, 96, 96)))
-        val title_textsize = a.getDimension(R.styleable.SFormCombo_x_title_textsize, 14f).toInt()
+        val title_textsize = getTextSizeInSp(a, R.styleable.SFormCombo_x_title_textsize, 14)
         if (a.hasValue(R.styleable.SFormCombo_x_title_typeface)) {
             val title_font = a.getResourceId(R.styleable.SFormCombo_x_title_typeface, -1)
             setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
@@ -134,7 +136,7 @@ abstract class SFormCombo : LinearLayout {
         }
         // Content
         setTextColor(a.getColor(R.styleable.SFormCombo_x_content_textcolor, Color.rgb(0, 0, 0)))
-        val content_textsize = a.getDimension(R.styleable.SFormCombo_x_content_textsize, 16f).toInt()
+        val content_textsize = getTextSizeInSp(a, R.styleable.SFormCombo_x_content_textsize, 16)
         if (a.hasValue(R.styleable.SFormCombo_x_content_typeface)) {
             val content_font = a.getResourceId(R.styleable.SFormCombo_x_content_typeface, -1)
             setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
@@ -190,6 +192,10 @@ abstract class SFormCombo : LinearLayout {
     //endregion
     internal fun dp(v: Int): Int {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), context.resources.displayMetrics))
+    }
+    private fun getTextSizeInSp(a: TypedArray, @StyleableRes attr: Int, defValue: Int): Int {
+        val density = resources.displayMetrics.scaledDensity
+        return (a.getDimensionPixelSize(attr, (defValue * density).toInt()) / density).toInt()
     }
     //region Picker
     private fun showPicker() {

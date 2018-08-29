@@ -2,11 +2,13 @@ package com.oursky.widget
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
+import android.support.annotation.StyleableRes
 import android.support.v4.content.res.ResourcesCompat
 import android.text.Editable
 import android.text.InputType
@@ -143,7 +145,8 @@ open class SFormEdit : LinearLayout {
             setTitleIcon(a.getResourceId(R.styleable.SFormEdit_x_title_icon, -1))
         }
         setTitleColor(a.getColor(R.styleable.SFormEdit_x_title_textcolor, Color.rgb(96, 96, 96)))
-        val title_textsize = a.getDimension(R.styleable.SFormEdit_x_title_textsize, 14f).toInt()
+        val title_textsize = getTextSizeInSp(a, R.styleable.SFormEdit_x_title_textsize, 14)
+
         if (a.hasValue(R.styleable.SFormEdit_x_title_typeface)) {
             val title_font = a.getResourceId(R.styleable.SFormEdit_x_title_typeface, -1)
             setTitleFont(title_textsize, ResourcesCompat.getFont(context, title_font), Typeface.BOLD)
@@ -153,7 +156,7 @@ open class SFormEdit : LinearLayout {
         // Content
         setHintColor(a.getColor(R.styleable.SFormEdit_x_hint_textcolor, Color.rgb(160, 160, 160)))
         setTextColor(a.getColor(R.styleable.SFormEdit_x_content_textcolor, Color.rgb(0, 0, 0)))
-        val content_textsize = a.getDimension(R.styleable.SFormEdit_x_content_textsize, 16f).toInt()
+        val content_textsize = getTextSizeInSp(a, R.styleable.SFormEdit_x_content_textsize, 16)
         if (a.hasValue(R.styleable.SFormEdit_x_content_typeface)) {
             val content_font = a.getResourceId(R.styleable.SFormEdit_x_content_typeface, -1)
             setTextFont(content_textsize, ResourcesCompat.getFont(context, content_font), Typeface.NORMAL)
@@ -161,7 +164,7 @@ open class SFormEdit : LinearLayout {
             setTextFont(content_textsize, null, Typeface.NORMAL)
         }
         // Status
-        val status_textsize = a.getDimension(R.styleable.SFormEdit_x_status_textsize, 10f).toInt()
+        val status_textsize = getTextSizeInSp(a, R.styleable.SFormEdit_x_status_textsize, 10)
         setStatusColor(a.getColor(R.styleable.SFormEdit_x_status_textcolor, Color.rgb(192, 96, 96)))
         if (a.hasValue(R.styleable.SFormEdit_x_status_typeface)) {
             val status_font = a.getResourceId(R.styleable.SFormEdit_x_status_typeface, -1)
@@ -272,5 +275,9 @@ open class SFormEdit : LinearLayout {
     }
     private fun dp(v: Int): Int {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), context.resources.displayMetrics))
+    }
+    private fun getTextSizeInSp(a: TypedArray, @StyleableRes attr: Int, defValue: Int): Int {
+        val density = resources.displayMetrics.scaledDensity
+        return (a.getDimensionPixelSize(attr, (defValue * density).toInt()) / density).toInt()
     }
 }
