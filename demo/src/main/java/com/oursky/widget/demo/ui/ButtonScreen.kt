@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import com.oursky.widget.SButton
+import com.oursky.widget.SLabel
 import com.oursky.widget.STabbar
 import com.oursky.widget.demo.R
 
@@ -23,7 +24,7 @@ class ButtonScreen : BaseController() {
         val button1 = SButton(context).apply {
             setPadding(paddingH, paddingV, paddingH, paddingV)
             setBackgroundColor(Color.argb(255, 51, 102, 255), corner)
-            setIcon(SButton.IconIndex.LEFT, R.mipmap.ic_launcher, iconSize)
+            setIcon(SLabel.IconIndex.LEFT, R.mipmap.ic_launcher, iconSize)
             setTextColor(Color.WHITE)
             setText("Button 1")
             onClick = { _ -> Log.d("ButtonScreen", "button1 clicked") }
@@ -31,7 +32,7 @@ class ButtonScreen : BaseController() {
         val button2 = SButton(context).apply {
             setPadding(paddingH, paddingV, paddingH, paddingV)
             setBackgroundColor(Color.argb(255, 51, 102, 255), corner)
-            setIcon(SButton.IconIndex.TOP, R.mipmap.ic_launcher, iconSize)
+            setIcon(SLabel.IconIndex.TOP, R.mipmap.ic_launcher, iconSize)
             setTextColor(Color.WHITE)
             setText("Button 2")
             onClick = { _ -> Log.d("ButtonScreen", "button2 clicked") }
@@ -39,7 +40,7 @@ class ButtonScreen : BaseController() {
         val button3 = SButton(context).apply {
             setPadding(paddingH, paddingV, paddingH, paddingV)
             setBackgroundColor(Color.argb(255, 51, 102, 255), corner)
-            setIcon(SButton.IconIndex.RIGHT, R.mipmap.ic_launcher, iconSize)
+            setIcon(SLabel.IconIndex.RIGHT, R.mipmap.ic_launcher, iconSize)
             setTextColor(Color.WHITE)
             setText("Button 3")
             onClick = { _ -> Log.d("ButtonScreen", "button3 clicked") }
@@ -47,7 +48,7 @@ class ButtonScreen : BaseController() {
         val button4 = SButton(context).apply {
             setPadding(paddingH, paddingV, paddingH, paddingV)
             setBackgroundColor(Color.argb(255, 51, 102, 255), corner)
-            setIcon(SButton.IconIndex.BOTTOM, R.mipmap.ic_launcher, iconSize)
+            setIcon(SLabel.IconIndex.BOTTOM, R.mipmap.ic_launcher, iconSize)
             setTextColor(Color.WHITE)
             setText("Button 4")
             onClick = { _ -> Log.d("ButtonScreen", "button4 clicked") }
