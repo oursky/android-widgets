@@ -11,12 +11,18 @@
         <attr name="x_content_textcolor" format="color" />
         <attr name="x_content_textsize" format="dimension" />
         <attr name="x_content_text" format="string" />
+        <attr name="x_content_left_icon" format="reference" />
+        <attr name="x_content_left_icon_spacing" format="dimension" />
+        <attr name="x_content_right_icon" format="reference" />
+        <attr name="x_content_right_icon_spacing" format="dimension" />
+        <attr name="x_content_top_spacing" format="dimension"/>
         <attr name="x_hint_textcolor" format="color" />
         <attr name="x_hint_text" format="string" />
         <attr name="x_status_typeface" format="reference" />
         <attr name="x_status_textcolor" format="color" />
         <attr name="x_status_textsize" format="dimension" />
         <attr name="x_status_text" format="string" />
+        <attr name="x_border_color" format="color" />
     </declare-styleable>
 
     <declare-styleable name="SFormEdit">
@@ -64,18 +70,18 @@
         <attr name="x_content_textsize" />
         <attr name="x_content_text" />
         <attr name="x_content_text_selectable" />
-        <attr name="x_content_left_icon" format="reference" />
-        <attr name="x_content_left_icon_spacing" format="dimension" />
-        <attr name="x_content_right_icon" format="reference" />
-        <attr name="x_content_right_icon_spacing" format="dimension" />
-        <attr name="x_content_top_spacing" format="dimension"/>
+        <attr name="x_content_left_icon" />
+        <attr name="x_content_left_icon_spacing" />
+        <attr name="x_content_right_icon" />
+        <attr name="x_content_right_icon_spacing" />
+        <attr name="x_content_top_spacing" />
         <attr name="x_hint_textcolor" />
         <attr name="x_hint_text" />
         <attr name="x_status_typeface" />
         <attr name="x_status_textcolor" />
         <attr name="x_status_textsize" />
         <attr name="x_status_text" />
-        <attr name="x_border_color" format="color" />
+        <attr name="x_border_color" />
     </declare-styleable>
 
 </resources>
