@@ -1,12 +1,14 @@
 package com.oursky.widget
 
 import android.content.Context
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -98,6 +100,47 @@ open class SLabel : LinearLayout {
             }
         }
     }
+    fun setIconSpacing(index: IconIndex, dp: Int) {
+        when (index) {
+            IconIndex.LEFT -> {
+                val lpLeft = wIconLeft.layoutParams as LinearLayout.LayoutParams
+                lpLeft.rightMargin = dp(dp)
+                wIconLeft.layoutParams = lpLeft
+            }
+            IconIndex.TOP -> {
+                val lpTop = wIconTop.layoutParams as LinearLayout.LayoutParams
+                lpTop.bottomMargin = dp(dp)
+                wIconTop.layoutParams = lpTop
+            }
+            IconIndex.RIGHT -> {
+                val lpRight = wIconRight.layoutParams as LinearLayout.LayoutParams
+                lpRight.leftMargin = dp(dp)
+                wIconRight.layoutParams = lpRight
+            }
+            IconIndex.BOTTOM -> {
+                val lpBottom = wIconBottom.layoutParams as LinearLayout.LayoutParams
+                lpBottom.topMargin = dp(dp)
+                wIconBottom.layoutParams = lpBottom
+            }
+        }
+    }
+    fun setIconSpacing(dpRect: Rect) {
+        val lpLeft = wIconLeft.layoutParams as LinearLayout.LayoutParams
+        lpLeft.rightMargin = dp(dpRect.right)
+        wIconLeft.layoutParams = lpLeft
+        val lpTop = wIconTop.layoutParams as LinearLayout.LayoutParams
+        lpTop.bottomMargin = dp(dpRect.top)
+        wIconTop.layoutParams = lpTop
+        val lpRight = wIconRight.layoutParams as LinearLayout.LayoutParams
+        lpRight.leftMargin = dp(dpRect.left)
+        wIconRight.layoutParams = lpRight
+        val lpBottom = wIconBottom.layoutParams as LinearLayout.LayoutParams
+        lpBottom.topMargin = dp(dpRect.bottom)
+        wIconBottom.layoutParams = lpBottom
+    }
+    fun setIconSpacing(dp: Int) {
+        setIconSpacing(Rect(dp, dp, dp, dp))
+    }
     fun setFont(size: Int) {
         wText.textSize = size.toFloat()
     }
@@ -123,4 +166,10 @@ open class SLabel : LinearLayout {
             cornerRadius = corner
         }
     }
+
+    //region Helper functions
+    private fun dp(v: Int): Int {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), context.resources.displayMetrics))
+    }
+    //endregion
 }
