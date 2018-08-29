@@ -25,7 +25,7 @@ import android.widget.TextView
 import com.oursky.widget.helper.KeyboardHelper
 
 @Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "LocalVariableName")
-class SFormEdit : LinearLayout {
+open class SFormEdit : LinearLayout {
     // delegates
     var onTextChange: ((SFormEdit, String) -> Unit)? = null
     var onAction: ((SFormEdit, actionId: Int, ev: KeyEvent?) -> Boolean)? = null

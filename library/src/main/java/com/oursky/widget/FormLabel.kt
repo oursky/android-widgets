@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 @Suppress("MemberVisibilityCanBePrivate", "UNUSED_ANONYMOUS_PARAMETER", "LocalVariableName")
-class SFormLabel : LinearLayout {
+open class SFormLabel : LinearLayout {
     private val wTitleIcon: ImageView
     private val wTitle: TextView
     private val wValue: TextView
@@ -282,6 +282,4 @@ class SFormLabel : LinearLayout {
         view.layoutParams = lp
     }
     //endregion
-
-    companion object // Allow creating extension to make factory methods
 }
