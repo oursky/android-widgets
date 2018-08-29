@@ -8,7 +8,7 @@ import android.widget.Checkable
 import android.widget.ImageView
 
 @Suppress("unused")
-class SToggle : ImageView, Checkable {
+open class SToggle : ImageView, Checkable {
     // delegates
     var onToggle: ((SToggle, Boolean) -> Unit)? = null
     private var mChecked: Boolean = false

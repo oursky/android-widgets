@@ -14,6 +14,7 @@ import com.oursky.widget.SFormComboWithDate
 import com.oursky.widget.SFormComboWithList
 import com.oursky.widget.SFormComboWithTime
 import com.oursky.widget.SFormEdit
+import com.oursky.widget.SFormLabel
 import com.oursky.widget.demo.R
 
 class FormScreen : BaseController() {
@@ -51,6 +52,32 @@ class FormScreen : BaseController() {
             setArrowIcon(R.drawable.ic_combo)
             setTime(13, 20)
         }
+        val labelContentOnly = SFormLabel(context).apply {
+            setTitleIcon(R.mipmap.ic_launcher)
+            setTitle(R.string.formlabel_title)
+            setText(R.string.formlabel_content_no_icon)
+        }
+        val labelLeftIconOnly = SFormLabel(context).apply {
+            setTitleIcon(R.mipmap.ic_launcher)
+            setTitle(R.string.formlabel_title)
+            setText(R.string.formlabel_content_left_icon)
+            setLeftIconSpacing(10)
+            setLeftIcon(R.mipmap.ic_launcher_round)
+        }
+        val labelRightIconOnly = SFormLabel(context).apply {
+            setTitleIcon(R.mipmap.ic_launcher)
+            setTitle(R.string.formlabel_title)
+            setText(R.string.formlabel_content_right_icon)
+            setRightIconSpacing(10)
+            setRightIcon(R.mipmap.ic_launcher_round)
+        }
+        val labelBothIcon = SFormLabel(context).apply {
+            setTitleIcon(R.mipmap.ic_launcher)
+            setTitle(R.string.formlabel_title)
+            setText(R.string.formlabel_content_both_icon)
+            setLeftIcon(R.mipmap.ic_launcher_round)
+            setRightIcon(R.mipmap.ic_launcher_round)
+        }
         val contentView = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
         }
@@ -69,6 +96,19 @@ class FormScreen : BaseController() {
         contentView.addView(timePicker, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(margin, margin, margin, 0)
         })
+        contentView.addView(labelContentOnly, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(margin, margin, margin, 0)
+        })
+        contentView.addView(labelLeftIconOnly, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(margin, margin, margin, 0)
+        })
+        contentView.addView(labelRightIconOnly, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(margin, margin, margin, 0)
+        })
+        contentView.addView(labelBothIcon, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+            setMargins(margin, margin, margin, 0)
+        })
+
         // Setup Events
         edit1.onTextChange = { v, s ->
             if (s.length > 5 ) {

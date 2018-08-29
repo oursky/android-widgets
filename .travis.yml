@@ -24,7 +24,7 @@ matrix:
       before_install:
         - yes | sdkmanager "platforms;android-27"
       script:
-        - ./gradlew ktlint assembleDebug
+        - ./gradlew ktlint lintDebug assembleDebug
 
 notifications:
   email: false

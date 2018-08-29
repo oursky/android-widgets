@@ -15,7 +15,7 @@ import android.widget.TextView
 import com.oursky.widget.helper.TouchEffect
 
 @Suppress("UNUSED_PARAMETER", "UNUSED_ANONYMOUS_PARAMETER")
-class SButton : LinearLayout {
+open class SButton : LinearLayout {
     enum class IconIndex { LEFT, TOP, RIGHT, BOTTOM }
     // delegates
     var onClick: ((SButton) -> Unit)? = null
