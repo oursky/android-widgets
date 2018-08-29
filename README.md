@@ -24,6 +24,8 @@ dependencies {
   implementation 'com.github.oursky:android-widgets:0.0.1'
 }
 ```
-Replace `0.0.1` with the latest version or `master-SNAPSHOT`. For a list of version, check the [releases page](https://github.com/oursky/android-widgets/releases).
+Replace `0.0.1` with the latest version. For a list of version, check the [releases page](https://github.com/oursky/android-widgets/releases).
+
+You may also use the special version tag `master-SNAPSHOT` in development stage to access latest features. Note that gradle will cache the dependency so if you want to refetch you shall run `./gradlew --refresh-dependencies`
 
 Now you should be able to use the widgets directly. See here for a [list of widgets](library/src/main/java/com/oursky/widget).
