@@ -56,7 +56,7 @@ open class STabbar : LinearLayout {
                 setText(it.text)
                 setTextColor(textColor)
                 setFont(textSize, font)
-                setIcon(SButton.IconIndex.TOP, it.icon, iconSize)
+                setIcon(SLabel.IconIndex.TOP, it.icon, iconSize)
                 onClick = { v -> this@STabbar.onClick?.invoke(this@STabbar, this@STabbar.indexOfChild(v)) }
             }, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 weight = 1f
@@ -68,7 +68,7 @@ open class STabbar : LinearLayout {
             val child = getChildAt(index) as SButton
             child.setTextColor(textColor)
             child.setFont(textSize, font)
-            items?.let { child.setIcon(SButton.IconIndex.TOP, it[index].icon, iconSize) }
+            items?.let { child.setIcon(SLabel.IconIndex.TOP, it[index].icon, iconSize) }
         }
     }
 }
