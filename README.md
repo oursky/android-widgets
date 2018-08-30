@@ -26,6 +26,14 @@ dependencies {
 ```
 Replace `0.0.1` with the latest version. For a list of version, check the [releases page](https://github.com/oursky/android-widgets/releases).
 
-You may also use the special version tag `master-SNAPSHOT` in development stage to access latest features. Note that gradle will cache the dependency so if you want to refetch you shall run `./gradlew --refresh-dependencies`
+###### NOTE for using snapshot
+You may also use the special version tag `master-SNAPSHOT` to access latest features. Note that gradle will cache the dependency so you may want to add this to `app/build.gradle`
+```
+configurations.all {
+    // do not cache changing modules, ie. 'com.github.oursky:android-widgets:master-SNAPSHOT'
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+```
+See [this](https://github.com/jitpack/jitpack.io) for detail.
 
 Now you should be able to use the widgets directly. See here for a [list of widgets](library/src/main/java/com/oursky/widget).
