@@ -208,7 +208,7 @@ open class SFormLabel : LinearLayout {
     //region Text Value
     fun setTitleIcon(resid: Int) {
         wTitleIcon.setImageResource(resid)
-        wTitleIcon.visibility = View.VISIBLE
+        wTitleIcon.visibility = if (resid == 0) View.GONE else View.VISIBLE
     }
     fun setTitle(resid: Int) {
         wTitle.setText(resid)
@@ -233,11 +233,11 @@ open class SFormLabel : LinearLayout {
     }
     fun setRightIcon(resid: Int) {
         wRightIcon.setImageResource(resid)
-        wRightIcon.visibility = View.VISIBLE
+        wRightIcon.visibility = if (resid == 0) View.GONE else View.VISIBLE
     }
     fun setLeftIcon(resid: Int) {
         wLeftIcon.setImageResource(resid)
-        wLeftIcon.visibility = View.VISIBLE
+        wLeftIcon.visibility = if (resid == 0) View.GONE else View.VISIBLE
     }
     fun setRightIconSpacing(dp: Int) {
         wRightIcon.post {
