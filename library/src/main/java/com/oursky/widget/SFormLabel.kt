@@ -213,6 +213,9 @@ open class SFormLabel : LinearLayout {
     fun setTitle(resid: Int) {
         wTitle.setText(resid)
     }
+    fun setTitle(text: String?) {
+        wTitle.setText(text, TextView.BufferType.EDITABLE)
+    }
     fun setHint(resid: Int) {
         wValue.setHint(resid)
     }
