@@ -265,6 +265,10 @@ open class SFormLabel : LinearLayout {
         }
     }
 
+    /**
+     * Set the top and bottom margin of text as if setting through its MarginLayoutParams.
+     * Unit is dp. Non-RTL-aware.
+     */
     fun setTextMargin(top: Int, bottom: Int) {
         wValueLayout.post {
             (wValueLayout.layoutParams as? MarginLayoutParams)?.let { lp ->
