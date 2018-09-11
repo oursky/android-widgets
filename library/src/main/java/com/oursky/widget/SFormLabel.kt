@@ -253,6 +253,7 @@ open class SFormLabel : LinearLayout {
             }
         }
     }
+
     fun setTopSpacing(dp: Int) {
         wValueLayout.post {
             (wValueLayout.layoutParams as? MarginLayoutParams)?.let { lp ->
@@ -260,6 +261,16 @@ open class SFormLabel : LinearLayout {
             }
         }
     }
+
+    fun setTextMargin(top: Int, bottom: Int) {
+        wValueLayout.post {
+            (wValueLayout.layoutParams as? MarginLayoutParams)?.let { lp ->
+                lp.topMargin = dp(top)
+                lp.bottomMargin = dp(bottom)
+            }
+        }
+    }
+
     fun setBorderColor(color: Int) {
         wBorder.setBackgroundColor(color)
     }

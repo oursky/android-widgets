@@ -79,8 +79,8 @@ abstract class SFormCombo : LinearLayout {
                         weight = 1.0f
                     })
             addView(wArrow,
-                    LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                        setMargins(dp(8), 0, 0, 0)
+                    LayoutParams(dp(24), dp(24)).apply {
+                        setMargins(dp(8), 0, dp(8), 0)
                     })
         }, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
             setMargins(0, 0, 0, dp(2))
@@ -186,6 +186,25 @@ abstract class SFormCombo : LinearLayout {
     fun setText(text: String?) {
         wText.text = text
     }
+
+    fun setTextMargin(top: Int, bottom: Int) {
+        wText.post {
+            (wText.layoutParams as? MarginLayoutParams)?.apply {
+                topMargin = dp(top)
+                bottomMargin = dp(bottom)
+            }
+        }
+    }
+
+    fun setArrowMargin(left: Int, right: Int) {
+        wArrow.post {
+            (wArrow.layoutParams as? MarginLayoutParams)?.apply {
+                leftMargin = dp(left)
+                rightMargin = dp(right)
+            }
+        }
+    }
+
     fun getText(): String {
         return wText.text.toString()
     }
