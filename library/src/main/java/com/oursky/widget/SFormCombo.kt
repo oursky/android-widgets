@@ -180,13 +180,26 @@ abstract class SFormCombo : LinearLayout {
     fun getTitle(): String {
         return wTitle.text.toString()
     }
+
     fun setArrowIcon(@DrawableRes resid: Int) {
         wArrow.setImageResource(resid)
     }
+
+    /**
+     * Set the scale type of arrow icon. Default is FIT_CENTER.
+     */
+    fun setArrowIconScaleType(type: ImageView.ScaleType) {
+        wArrow.scaleType = type
+    }
+
     fun setText(text: String?) {
         wText.text = text
     }
 
+    /**
+     * Set the left and right margin of text as if setting through its MarginLayoutParams.
+     * Unit is dp. Non-RTL-aware.
+     */
     fun setTextMargin(top: Int, bottom: Int) {
         wText.post {
             (wText.layoutParams as? MarginLayoutParams)?.apply {
@@ -196,6 +209,23 @@ abstract class SFormCombo : LinearLayout {
         }
     }
 
+    /**
+     * Set the dimension of arrow icon as if setting through its LayoutParams. Can be constants such
+     * as MATCH_PARENT, or sizes in px.
+     */
+    fun setArrowDimen(width: Int, height: Int) {
+        wArrow.post {
+            (wArrow.layoutParams as? MarginLayoutParams)?.apply {
+                this.width = width
+                this.height = height
+            }
+        }
+    }
+
+    /**
+     * Set the left and right margin of the arrow icon as if setting through its
+     * MarginLayoutParams. Unit is dp. Non-RTL-aware.
+     */
     fun setArrowMargin(left: Int, right: Int) {
         wArrow.post {
             (wArrow.layoutParams as? MarginLayoutParams)?.apply {
