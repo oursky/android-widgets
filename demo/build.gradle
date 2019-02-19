@@ -39,7 +39,7 @@ dependencies {
     // Android Base
     implementation 'com.android.support:appcompat-v7:27.1.1'
     // Conductor: https://github.com/bluelinelabs/Conductor
-    implementation 'com.bluelinelabs:conductor:2.1.4'
+    implementation 'com.bluelinelabs:conductor:2.1.5'
     // Our widget library (local development)
     implementation project(':library')
     // Our widget library (released)

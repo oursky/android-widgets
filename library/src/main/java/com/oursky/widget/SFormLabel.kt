@@ -35,7 +35,6 @@ open class SFormLabel : LinearLayout {
         wTitle = TextView(context, attrs, defStyleAttr).apply {
         }
         wValue = TextView(context, attrs, defStyleAttr).apply {
-            setTextIsSelectable(true)
         }
         wLeftIcon = ImageView(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
