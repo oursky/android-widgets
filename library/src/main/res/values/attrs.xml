@@ -69,7 +69,7 @@
         <attr name="x_content_textcolor" />
         <attr name="x_content_textsize" />
         <attr name="x_content_text" />
-        <attr name="x_content_text_selectable" />
+        <attr name="x_content_text_selectable" format="boolean"/>
         <attr name="x_content_left_icon" />
         <attr name="x_content_left_icon_spacing" />
         <attr name="x_content_right_icon" />
