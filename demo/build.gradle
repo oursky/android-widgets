@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.oursky.widgets.demo"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     // Enable JAVA8 and lambda
     compileOptions {
@@ -30,16 +30,16 @@ configurations {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // Lint
-    ktlint "com.github.shyiko:ktlint:0.15.0"
+    ktlint "com.github.shyiko:ktlint:0.31.0"
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     // Android Base
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     // Conductor: https://github.com/bluelinelabs/Conductor
-    implementation 'com.bluelinelabs:conductor:2.1.5'
+    implementation 'com.bluelinelabs:conductor:3.0.0-rc2'
     // Our widget library (local development)
     implementation project(':library')
     // Our widget library (released)

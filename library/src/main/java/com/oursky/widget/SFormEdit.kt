@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
-import android.support.annotation.StyleableRes
-import android.support.v4.content.res.ResourcesCompat
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.annotation.StyleableRes
+import androidx.core.content.res.ResourcesCompat
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher

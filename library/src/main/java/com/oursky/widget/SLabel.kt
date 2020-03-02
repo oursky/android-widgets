@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
