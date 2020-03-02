@@ -44,9 +44,9 @@ abstract class SFormCombo : LinearLayout {
     abstract fun setupPicker()
 
     constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): this(context, attrs, defStyleAttr, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr) {
         wTitleIcon = ImageView(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
             scaleType = ImageView.ScaleType.FIT_CENTER
@@ -350,8 +350,8 @@ class SFormComboWithList : SFormCombo {
     private var wPickerTitle: TextView? = null
     private var wPicker: NumberPicker? = null
     constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
     }
     override fun createPicker(): View {
         if (wPickerTitle == null) {
@@ -414,8 +414,8 @@ class SFormComboWithDate : SFormCombo {
     private var mMaxDate: Long
     private val mDateFormatter: SimpleDateFormat
     constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         mDateFormatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.US)
         val now = Calendar.getInstance()
         mYear = now.get(Calendar.YEAR)
@@ -513,8 +513,8 @@ class SFormComboWithTime : SFormCombo {
     private var mHour: Int
     private var mMinute: Int
     constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         val now = Calendar.getInstance()
         mHour = now.get(Calendar.HOUR)
         mMinute = now.get(Calendar.MINUTE)
@@ -566,7 +566,7 @@ class SFormComboWithTime : SFormCombo {
         mHour = hour
         mMinute = minute
         updateLabel()
-        if (wPicker != null ) {
+        if (wPicker != null) {
             setupPicker()
         } else {
             onSelect?.invoke(this@SFormComboWithTime, mHour, mMinute)

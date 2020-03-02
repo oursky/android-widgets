@@ -38,9 +38,9 @@ open class SFormEdit : LinearLayout {
     private val wEye: SToggle
     private val wStatus: TextView
     constructor(context: Context) : this(context, null, 0)
-    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): this(context, attrs, defStyleAttr, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr) {
         wTitleIcon = ImageView(context, attrs, defStyleAttr).apply {
             visibility = View.GONE
             scaleType = ImageView.ScaleType.FIT_CENTER

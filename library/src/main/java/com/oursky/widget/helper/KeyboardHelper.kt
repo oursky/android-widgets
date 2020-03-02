@@ -24,7 +24,7 @@ internal object KeyboardHelper {
     fun hide(activity: Activity?) {
         if (activity == null) return
         var view = activity.currentFocus
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        // If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
             view = activity.window.decorView
         }
