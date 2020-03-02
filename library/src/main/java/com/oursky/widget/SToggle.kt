@@ -6,9 +6,10 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.Checkable
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 
 @Suppress("unused")
-open class SToggle : ImageView, Checkable {
+open class SToggle : AppCompatImageView, Checkable {
     // delegates
     var onToggle: ((SToggle, Boolean) -> Unit)? = null
     private var mChecked: Boolean = false

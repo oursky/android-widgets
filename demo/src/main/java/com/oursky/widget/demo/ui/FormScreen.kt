@@ -111,14 +111,14 @@ class FormScreen : BaseController() {
 
         // Setup Events
         edit1.onTextChange = { v, s ->
-            if (s.length > 5 ) {
+            if (s.length > 5) {
                 v.setStatus(R.string.formedit_err_toolong)
             } else {
                 v.setStatus(null)
             }
         }
         edit2.onTextChange = { v, s ->
-            if (s.length > 7 ) {
+            if (s.length > 7) {
                 v.setStatus(R.string.formedit_err_toolong)
             } else {
                 v.setStatus(null)

@@ -20,9 +20,8 @@ abstract class BaseController : Controller {
     protected abstract fun onCreateView(context: Context): View
 
     //region Lifecycle
-    //---------------------------------------------------------------
-    constructor(): super()
-    constructor(args: Bundle): super(args)
+    constructor() : super()
+    constructor(args: Bundle) : super(args)
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         val context = container.context
         val view = onCreateView(context)
@@ -30,11 +29,9 @@ abstract class BaseController : Controller {
         blockable.addView(view, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
         return blockable
     }
-    //---------------------------------------------------------------
     //endregion
 
     //region Block clicks while transition
-    //---------------------------------------------------------------
     override fun onChangeStarted(changeHandler: ControllerChangeHandler, changeType: ControllerChangeType) {
         super.onChangeStarted(changeHandler, changeType)
         val v = view
@@ -67,11 +64,9 @@ abstract class BaseController : Controller {
             return mBlockTouch || super.onInterceptTouchEvent(ev)
         }
     }
-    //---------------------------------------------------------------
     //endregion
 
     //region Navigation
-    //---------------------------------------------------------------
     protected fun popController() {
         router.popCurrentController()
     }
@@ -93,6 +88,5 @@ abstract class BaseController : Controller {
                 .popChangeHandler(popEffect)
         )
     }
-    //---------------------------------------------------------------
     //endregion
 }

@@ -11,7 +11,7 @@ import android.util.TypedValue
 import android.widget.LinearLayout
 
 open class STabbar : LinearLayout {
-    data class Item (
+    data class Item(
         @DrawableRes val icon: Int,
         @StringRes val text: Int
     )
