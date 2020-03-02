@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.annotation.StyleableRes
-import android.support.v4.content.res.ResourcesCompat
+import androidx.annotation.StyleableRes
+import androidx.core.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
